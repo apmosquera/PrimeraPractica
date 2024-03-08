@@ -1,0 +1,16 @@
+<VirtualHost *:80>
+    ServerAdmin www.parcial.com
+    DocumentRoot /var/www/html
+    ErrorDocument 401 /paila.html
+
+    <Directory "/var/www/html/archivos_privados">
+        AuthType Basic
+        AuthName "Restricted Area"
+        AuthBasicProvider PAM
+        AuthPAMService apache
+        Require valid-user
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

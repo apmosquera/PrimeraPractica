@@ -1,0 +1,10 @@
+/*Zona hacia adelante*/
+zone "parcial.com" {
+    type master;
+    file "/etc/bind/db.parcial.com";
+
+/*Zona inversa*/
+zone "50.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.192";
+};

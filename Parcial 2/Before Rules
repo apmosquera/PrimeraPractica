@@ -1,0 +1,22 @@
+#
+# rules.before
+#
+# Rules that should be run before the ufw command line added rules. Custom
+# rules should be added to one of these chains:
+#   ufw-before-input
+#   ufw-before-output
+#   ufw-before-forward
+#
+
+# NAT table rules
+*nat
+:POSTROUTING ACCEPT [0:0]
+
+# Forward traffic from port 8000 to port 8080
+#-A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.50.2:80
+-A PREROUTING -p tcp --dport 21 -j DNAT --to-destination 192.168.50.2:21
+
+# Don�~@~Yt masquerade local traffic.
+-A POSTROUTING -s 192.168.50.0/24 -o eth1 -j MASQUERADE
+-A POSTROUTING -s 192.168.1.0/24 -o eth1 -j MASQUERADE
+COMMIT
